@@ -90,11 +90,11 @@ public class Ex3Algo implements PacManAlgo {
             _stuckMoves = 4;
         }
 
-        int wallColor = Game.getIntColor(Color.BLUE, 0)
+        int wallColor = Game.getIntColor(Color.BLUE, 0);
         Map realMap = new Map(board);
         realMap.setCyclic(GameInfo.CYCLIC_MODE);
 
-        // If we are in "Stuck Mode", execute a random valid move immediately.
+        // If we are Stuck then do a random valid move.
         if (_stuckMoves > 0) {
             _stuckMoves--;
             return randomValidDir(pacmanPos, realMap, wallColor);
@@ -107,9 +107,9 @@ public class Ex3Algo implements PacManAlgo {
 
         GhostCL[] ghosts = game.getGhosts(0);
 
+        // A ghost is dangerous if it is NOT eatable, or if its eatable time is running out.
         // Mark dangerous ghosts as walls on the safeMap
         for (GhostCL g : ghosts) {
-            // A ghost is dangerous if it is NOT eatable, or if its eatable time is running out.
             if (g.remainTimeAsEatable(0) < 15) {
                 Pixel2D gPos = parsePos(g.getPos(0).toString());
                 safeMap.setPixel(gPos, wallColor);
@@ -152,7 +152,7 @@ public class Ex3Algo implements PacManAlgo {
             }
         }
 
-        // move randomly (but don't hit a wall).
+        // move randomly without hitting a wall.
         return randomValidDir(pacmanPos, realMap, wallColor);
     }
 
@@ -214,9 +214,8 @@ public class Ex3Algo implements PacManAlgo {
         return bestTarget;
     }
 
-    // =============================================================
-    // Helper Methods
-    // =============================================================
+
+    // Help Methods
 
     /**
      * Calculates the next position coordinates based on a numeric direction index (0-3).
