@@ -15,9 +15,9 @@ public class Index2D implements Pixel2D {
     }
     public double distance2D(Pixel2D t) {
         double ans = 0;
-        /////// add your code below ///////
-
-        ///////////////////////////////////
+        double dx = this.getX() - t.getX();
+        double dy = this.getY() - t.getY();
+        ans = Math.sqrt(dx * dx + dy * dy);
         return ans;
     }
     @Override
