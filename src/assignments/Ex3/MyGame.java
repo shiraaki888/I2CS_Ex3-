@@ -19,7 +19,6 @@ public class MyGame {
             {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
 
-    // משתנים גלובליים וכיוונים
     private static int pacX=11, pacY=1, score=0, level=1, pills=0, eaten=0, tick=0;
     private static ArrayList<int[]> ghosts = new ArrayList<>();
     private static boolean auto = false;
@@ -55,10 +54,10 @@ public class MyGame {
     }
 
     private static void initLevel(int lvl) {
-        pills=0; eaten=0; ghosts.clear(); map[10][11]=2; // פריצת תקרה
+        pills=0; eaten=0; ghosts.clear(); map[10][11]=2;
         for(int y=0; y<map.length; y++) for(int x=0; x<map[0].length; x++) {
             if(map[y][x]!=1) {
-                if((x>=9 && x<=13) && (y>=10 && y<=12)) map[y][x]=2; // בית
+                if((x>=9 && x<=13) && (y>=10 && y<=12)) map[y][x]=2;
                 else { map[y][x]=0; pills++; }
             }
         }
@@ -69,11 +68,9 @@ public class MyGame {
     private static void moveGhosts() {
         for (int[] g : ghosts) {
             int gx = g[0], gy = g[1];
-            // יציאה מהבית
             if (gy < 12 && gx >=9 && gx <=13) {
                 if (gx < 11) g[0]++; else if (gx > 11) g[0]--; else g[1]++; continue;
             }
-            // תנועה אקראית (30%) או רדיפה
             int dx=0, dy=0;
             if (Math.random() < 0.3) {
                 int r = (int)(Math.random()*4);
@@ -90,15 +87,15 @@ public class MyGame {
         int[][] safeMap = new int[h][w];
         for(int i=0; i<h; i++) safeMap[i] = map[i].clone();
 
-        for (int[] g : ghosts) { // סימון סכנה
+        for (int[] g : ghosts) {
             int gy = (h-1)-g[1];
             if(gy>=0 && gy<h) safeMap[gy][g[0]] = 1;
             for(int k=0; k<4; k++) if(isValid(g[0]+DX[k], g[1]+DY[k], map)) safeMap[(h-1)-(g[1]+DY[k])][g[0]+DX[k]] = 1;
         }
 
-        int[] move = getBest(safeMap); // נסיון בטוח
-        if (move == null) move = getEscape(); // בריחה
-        if (move == null) move = getBest(map); // נסיון רגיל
+        int[] move = getBest(safeMap);
+        if (move == null) move = getEscape();
+        if (move == null) move = getBest(map);
         if (move != null) updatePos(move[0], move[1]);
     }
 
