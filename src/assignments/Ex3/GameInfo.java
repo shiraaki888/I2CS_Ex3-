@@ -13,6 +13,6 @@ public class GameInfo {
 	public static final double RESOLUTION_NORM =0.75; // [0.75,1.2]
 	private static PacManAlgo _manualAlgo = new ManualAlgo();
 	private static PacManAlgo _myAlgo = new Ex3Algo();
-    public static final PacManAlgo ALGO = _manualAlgo;
-//	public static final PacManAlgo ALGO = _myAlgo;
+    //public static final PacManAlgo ALGO = _manualAlgo;
+    public static final PacManAlgo ALGO = _myAlgo;
 }
