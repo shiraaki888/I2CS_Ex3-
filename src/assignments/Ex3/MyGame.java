@@ -14,7 +14,7 @@ import java.util.*;
 public class MyGame {
 
     // The Game Map (1 = Wall, 0 = Dot/Path, 2 = Empty/House)
-    private static int[][] map = {
+    static int[][] map = {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1},
@@ -109,7 +109,7 @@ public class MyGame {
      * Resets Pacman position, counts dots, clears ghosts, and spawns new ghosts based on level number.
      * Also opens the ghost house exit (roof).
      */
-    private static void initLevel(int lvl) {
+    static void initLevel(int lvl) {
         pills=0; eaten=0; ghosts.clear(); map[10][11]=2;
         for(int y=0; y<map.length; y++) for(int x=0; x<map[0].length; x++) {
             if(map[y][x]!=1) {
@@ -229,7 +229,7 @@ public class MyGame {
     /**
      * a BFS algorithm to calculate distances from source (sx, sy) to all points.
      */
-    private static int[][] bfs(int sx, int sy, int[][] g) {
+    static int[][] bfs(int sx, int sy, int[][] g) {
         int h=g.length, w=g[0].length; int[][] d = new int[h][w];
         for(int[] r : d) Arrays.fill(r, -1);
         int syArr = (h-1)-sy; if(syArr<0||syArr>=h) return d;
@@ -247,7 +247,7 @@ public class MyGame {
     /**
      * Checks if a coordinate is within the board boundaries and is NOT a wall.
      */
-    private static boolean isValid(int x, int y, int[][] g) {
+    static boolean isValid(int x, int y, int[][] g) {
         int h=g.length; return x>=0 && x<g[0].length && y>=0 && y<h && g[(h-1)-y][x]!=1;
     }
 
